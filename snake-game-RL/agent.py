@@ -19,7 +19,10 @@ class Agent:
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
         self.model = Linear_QNet(11, 256, 3)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
+        self.load_model()  # Load the model right after initialization
 
+    def load_model(self, file_name='model.pth'):
+        self.model.load(file_name)
 
     def get_state(self, game):
         head = game.snake[0]
